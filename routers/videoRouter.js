@@ -12,8 +12,6 @@ import { uploadVideo } from "../middlewares";
 
 const videoRouter = express.Router();
 
-console.log(routes.editVideo());
-
 // Upload Video
 videoRouter.get(routes.upload, getUpload);
 videoRouter.post(routes.upload, uploadVideo, postUpload);
