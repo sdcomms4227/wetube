@@ -124,14 +124,13 @@ table {
 }
 a {
   all: unset;
+  color: unset;
   cursor: pointer;
 }
-
 *,
 input {
   box-sizing: border-box;
 }
-
 input {
   border: none;
   box-sizing: border-box;
