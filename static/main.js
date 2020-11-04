@@ -14,6 +14,9 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _videoPlayer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./videoPlayer */ "./assets/js/videoPlayer.js");
 /* harmony import */ var _videoPlayer__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_videoPlayer__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _videoRecorder__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./videoRecorder */ "./assets/js/videoRecorder.js");
+/* harmony import */ var _videoRecorder__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_videoRecorder__WEBPACK_IMPORTED_MODULE_1__);
+
 
 
 
@@ -154,6 +157,108 @@ function init() {
 }
 
 if (videoContainer) {
+  init();
+}
+
+/***/ }),
+
+/***/ "./assets/js/videoRecorder.js":
+/*!************************************!*\
+  !*** ./assets/js/videoRecorder.js ***!
+  \************************************/
+/*! unknown exports (runtime-defined) */
+/*! runtime requirements:  */
+/***/ (() => {
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var recordContainer = document.getElementById("jsRecordContainer");
+var recordBtn = document.getElementById("jsRecordButton");
+var videoPreview = document.getElementById("jsVideoPreview");
+var streamObject;
+var videoRecorder;
+
+var handleVideoData = function handleVideoData(event) {
+  var videoFile = event.data;
+  var link = document.createElement("a");
+  link.href = URL.createObjectURL(videoFile);
+  link.download = "recorded.webm";
+  document.body.appendChild(link);
+  link.click();
+};
+
+var stopRecording = function stopRecording() {
+  videoRecorder.stop();
+  recordBtn.removeEventListener("click", stopRecording);
+  recordBtn.addEventListener("click", getVideo);
+  recordBtn.innerHTML = "Start Recording";
+};
+
+var startRecording = function startRecording() {
+  videoRecorder = new MediaRecorder(streamObject);
+  videoRecorder.start();
+  videoRecorder.addEventListener("dataavailable", handleVideoData);
+  recordBtn.addEbentListener("click", stopRecording);
+};
+
+var getVideo = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+    var stream;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.prev = 0;
+            _context.next = 3;
+            return navigator.mediaDevices.getUserMedia({
+              audio: true,
+              video: {
+                width: 1280,
+                height: 720
+              }
+            });
+
+          case 3:
+            stream = _context.sent;
+            videoPreview.srcObject = stream;
+            videoPreview.muted = true;
+            videoPreview.play();
+            recordBtn.innerHTML = "Stop Recording";
+            streamObject = stream;
+            startRecording();
+            _context.next = 15;
+            break;
+
+          case 12:
+            _context.prev = 12;
+            _context.t0 = _context["catch"](0);
+            recordBtn.innerHTML = "🙁 Can't record";
+
+          case 15:
+            _context.prev = 15;
+            recordBtn.removeEventListener("click", getVideo);
+            return _context.finish(15);
+
+          case 18:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[0, 12, 15, 18]]);
+  }));
+
+  return function getVideo() {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+function init() {
+  recordBtn.addEventListener("click", getVideo);
+}
+
+if (recordContainer) {
   init();
 }
 
