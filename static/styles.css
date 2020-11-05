@@ -426,9 +426,36 @@ input[type="submit"] {
     .video-detail__container .video__info .video__description {
       font-size: 16px; }
   .video-detail__container .video__comments {
-    margin-top: 25px; }
+    margin-top: 25px;
+    text-align: center; }
     .video-detail__container .video__comments .video__comment-number {
       font-size: 18px; }
+    .video-detail__container .video__comments .add__comment {
+      margin-top: 25px;
+      width: 100%; }
+      .video-detail__container .video__comments .add__comment input {
+        width: 100%; }
+    .video-detail__container .video__comments .video__comments-list {
+      margin-top: 50px; }
+      .video-detail__container .video__comments .video__comments-list li {
+        position: relative;
+        background-color: #3498db;
+        color: white;
+        padding: 15px;
+        border-radius: 20px;
+        border-bottom-left-radius: 0px; }
+        .video-detail__container .video__comments .video__comments-list li:not(:last-child) {
+          margin-bottom: 15px; }
+        .video-detail__container .video__comments .video__comments-list li .jsDeleteCommentButton {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          right: -25px;
+          margin: auto;
+          width: 20px;
+          height: 20px;
+          padding: 0;
+          background-color: transparent; }
 
 .user-profile {
   width: 100%;
