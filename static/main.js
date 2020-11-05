@@ -22,9 +22,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 var addCommentForm = document.getElementById("jsAddComment");
 var commentList = document.getElementById("jsCommentList");
 var commentNumber = document.getElementById("jsCommentNumber");
+var commentText = document.getElementById("jsCommentText");
 
 var increaseNumber = function increaseNumber() {
-  commentNumber.innerHTML = parseInt(commentNumber.innerHTML, 10) + 1;
+  var currentNumber = parseInt(commentNumber.innerHTML, 10);
+  commentNumber.innerHTML = currentNumber + 1;
+
+  if (currentNumber === 1) {
+    commentText.innerHTML = "comments";
+  }
 };
 
 var addComment = function addComment(comment) {
@@ -91,6 +97,84 @@ if (addCommentForm) {
 
 /***/ }),
 
+/***/ "./assets/js/deleteComment.js":
+/*!************************************!*\
+  !*** ./assets/js/deleteComment.js ***!
+  \************************************/
+/*! unknown exports (runtime-defined) */
+/*! runtime requirements: __webpack_require__ */
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var _require = __webpack_require__(/*! axios */ "./node_modules/axios/index.js"),
+    Axios = _require["default"];
+
+var deleteCommentBtnsCollection = document.getElementsByClassName("jsDeleteCommentButton");
+var commentNumber = document.getElementById("jsCommentNumber");
+var commentText = document.getElementById("jsCommentText");
+
+var decreaseNumber = function decreaseNumber() {
+  var currentNumber = parseInt(commentNumber.innerHTML, 10);
+  commentNumber.innerHTML = currentNumber - 1;
+
+  if (currentNumber === 2) {
+    commentText.innerHTML = "comment";
+  } else if (currentNumber === 1) {
+    commentText.innerHTML = "comments";
+  }
+};
+
+var removeComment = function removeComment(comment) {
+  var commentEl = document.getElementById(comment);
+  commentEl.remove();
+  decreaseNumber();
+};
+
+var deleteComment = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
+    var commentId;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            // const videoId = window.location.href.split("/videos/")[1];
+            commentId = event.target.parentNode.getAttribute("id"); // const response = await Axios({
+            //   url: `/api/${videoId}/comment/${commentId}/delete`,
+            //   method: "POST",
+            // });
+            // if (response.status === 200) {
+
+            removeComment(commentId); // }
+
+          case 2:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function deleteComment(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+function init() {
+  var deleteCommentBtnsArray = Array.from(deleteCommentBtnsCollection);
+  deleteCommentBtnsArray.forEach(function (element) {
+    element.addEventListener("click", deleteComment);
+  });
+}
+
+if (deleteCommentBtnsCollection) {
+  init();
+}
+
+/***/ }),
+
 /***/ "./assets/js/main.js":
 /*!***************************!*\
   !*** ./assets/js/main.js ***!
@@ -107,6 +191,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _videoRecorder__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./videoRecorder */ "./assets/js/videoRecorder.js");
 /* harmony import */ var _videoRecorder__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_videoRecorder__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _addComment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./addComment */ "./assets/js/addComment.js");
+/* harmony import */ var _deleteComment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./deleteComment */ "./assets/js/deleteComment.js");
+/* harmony import */ var _deleteComment__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_deleteComment__WEBPACK_IMPORTED_MODULE_3__);
+
 
 
 
