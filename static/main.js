@@ -138,29 +138,30 @@ var removeComment = function removeComment(commentId) {
 
 var deleteComment = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
-    var commentId, response;
+    var videoId, commentId, response;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
+            videoId = window.location.href.split("/videos/")[1];
             commentId = event.target.parentNode.getAttribute("id");
-            _context.next = 3;
+            _context.next = 4;
             return axios__WEBPACK_IMPORTED_MODULE_0___default()({
               url: "/api/".concat(commentId, "/delete-comment"),
               method: "POST",
               data: {
-                commentId: commentId
+                videoId: videoId
               }
             });
 
-          case 3:
+          case 4:
             response = _context.sent;
 
             if (response.status === 200) {
               removeComment(commentId);
             }
 
-          case 5:
+          case 6:
           case "end":
             return _context.stop();
         }

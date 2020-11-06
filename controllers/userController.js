@@ -6,7 +6,6 @@ export const getJoin = (req, res) => {
   res.render("join", { pageTitle: "Join" });
 };
 export const postJoin = async (req, res, next) => {
-  console.log(req.body);
   const {
     body: { name, email, password, password2 },
   } = req;
@@ -43,8 +42,6 @@ export const githubLogin = passport.authenticate("github", {
 });
 
 export const githubLoginCallback = async (_, __, profile, cb) => {
-  console.log(profile);
-
   const {
     _json: { id, name, avatar_url: avatarUrl },
   } = profile;
@@ -119,7 +116,6 @@ export const userDetail = async (req, res) => {
   } = req;
   try {
     const user = await User.findById(id).populate("videos");
-    console.log(user);
     res.render("userDetail", { pageTitle: "User Detail", user });
   } catch (error) {
     res.redirect(routes.home);

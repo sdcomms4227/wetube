@@ -23,11 +23,12 @@ const removeComment = (commentId) => {
 };
 
 const deleteComment = async (event) => {
+  const videoId = window.location.href.split("/videos/")[1];
   const commentId = event.target.parentNode.getAttribute("id");
   const response = await axios({
     url: `/api/${commentId}/delete-comment`,
     method: "POST",
-    data: { commentId },
+    data: { videoId },
   });
   if (response.status === 200) {
     removeComment(commentId);
