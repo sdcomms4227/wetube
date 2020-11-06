@@ -52,7 +52,7 @@ var sendComment = /*#__PURE__*/function () {
             videoId = window.location.href.split("/videos/")[1];
             _context.next = 3;
             return axios__WEBPACK_IMPORTED_MODULE_0___default()({
-              url: "/api/".concat(videoId, "/comment"),
+              url: "/api/".concat(videoId, "/add-comment"),
               method: "POST",
               data: {
                 comment: comment
@@ -101,16 +101,19 @@ if (addCommentForm) {
 /*!************************************!*\
   !*** ./assets/js/deleteComment.js ***!
   \************************************/
-/*! unknown exports (runtime-defined) */
-/*! runtime requirements: __webpack_require__ */
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+/*! namespace exports */
+/*! exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_require__.n, __webpack_require__.r, __webpack_exports__, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-var _require = __webpack_require__(/*! axios */ "./node_modules/axios/index.js"),
-    Axios = _require["default"];
 
 var deleteCommentBtnsCollection = document.getElementsByClassName("jsDeleteCommentButton");
 var commentNumber = document.getElementById("jsCommentNumber");
@@ -127,29 +130,37 @@ var decreaseNumber = function decreaseNumber() {
   }
 };
 
-var removeComment = function removeComment(comment) {
-  var commentEl = document.getElementById(comment);
+var removeComment = function removeComment(commentId) {
+  var commentEl = document.getElementById(commentId);
   commentEl.remove();
   decreaseNumber();
 };
 
 var deleteComment = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
-    var commentId;
+    var commentId, response;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            // const videoId = window.location.href.split("/videos/")[1];
-            commentId = event.target.parentNode.getAttribute("id"); // const response = await Axios({
-            //   url: `/api/${videoId}/comment/${commentId}/delete`,
-            //   method: "POST",
-            // });
-            // if (response.status === 200) {
+            commentId = event.target.parentNode.getAttribute("id");
+            _context.next = 3;
+            return axios__WEBPACK_IMPORTED_MODULE_0___default()({
+              url: "/api/".concat(commentId, "/delete-comment"),
+              method: "POST",
+              data: {
+                commentId: commentId
+              }
+            });
 
-            removeComment(commentId); // }
+          case 3:
+            response = _context.sent;
 
-          case 2:
+            if (response.status === 200) {
+              removeComment(commentId);
+            }
+
+          case 5:
           case "end":
             return _context.stop();
         }
@@ -192,7 +203,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _videoRecorder__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_videoRecorder__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _addComment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./addComment */ "./assets/js/addComment.js");
 /* harmony import */ var _deleteComment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./deleteComment */ "./assets/js/deleteComment.js");
-/* harmony import */ var _deleteComment__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_deleteComment__WEBPACK_IMPORTED_MODULE_3__);
 
 
 

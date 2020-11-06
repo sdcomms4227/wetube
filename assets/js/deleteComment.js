@@ -1,4 +1,4 @@
-const { default: Axios } = require("axios");
+import axios from "axios";
 
 const deleteCommentBtnsCollection = document.getElementsByClassName(
   "jsDeleteCommentButton"
@@ -16,22 +16,22 @@ const decreaseNumber = () => {
   }
 };
 
-const removeComment = (comment) => {
-  const commentEl = document.getElementById(comment);
+const removeComment = (commentId) => {
+  const commentEl = document.getElementById(commentId);
   commentEl.remove();
   decreaseNumber();
 };
 
 const deleteComment = async (event) => {
-  // const videoId = window.location.href.split("/videos/")[1];
   const commentId = event.target.parentNode.getAttribute("id");
-  // const response = await Axios({
-  //   url: `/api/${videoId}/comment/${commentId}/delete`,
-  //   method: "POST",
-  // });
-  // if (response.status === 200) {
-  removeComment(commentId);
-  // }
+  const response = await axios({
+    url: `/api/${commentId}/delete-comment`,
+    method: "POST",
+    data: { commentId },
+  });
+  if (response.status === 200) {
+    removeComment(commentId);
+  }
 };
 
 function init() {
