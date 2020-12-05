@@ -127,8 +127,7 @@ export const userDetail = async (req, res) => {
   }
 };
 
-export const getEditProfile = (req, res) =>
-  res.render("editProfile", { pageTitle: "Edit Profile" });
+export const getEditProfile = (req, res) => res.render("editProfile", { pageTitle: "Edit Profile" });
 
 export const postEditProfile = async (req, res) => {
   const {
@@ -139,7 +138,7 @@ export const postEditProfile = async (req, res) => {
     await User.findByIdAndUpdate(req.user.id, {
       name,
       email,
-      avatarUrl: file ? file.path : req.user.avatarUrl,
+      avatarUrl: file ? file.location : req.user.avatarUrl,
     });
     res.redirect(routes.me);
   } catch (error) {
@@ -147,8 +146,7 @@ export const postEditProfile = async (req, res) => {
   }
 };
 
-export const getChangePassword = (req, res) =>
-  res.render("changePassword", { pageTitle: "Change Password" });
+export const getChangePassword = (req, res) => res.render("changePassword", { pageTitle: "Change Password" });
 
 export const postChangePassword = async (req, res) => {
   const {

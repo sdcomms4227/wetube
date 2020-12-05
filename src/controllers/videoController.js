@@ -27,15 +27,14 @@ export const search = async (req, res) => {
   res.render("Search", { pageTitle: "Search", searchingBy, videos });
 };
 
-export const getUpload = (req, res) =>
-  res.render("upload", { pageTitle: "Upload" });
+export const getUpload = (req, res) => res.render("upload", { pageTitle: "Upload" });
 export const postUpload = async (req, res) => {
   const {
     body: { title, description },
-    file: { path },
+    file: { location },
   } = req;
   const newVideo = await Video.create({
-    fileUrl: path,
+    fileUrl: location,
     title,
     description,
     creator: req.user.id,
@@ -50,9 +49,7 @@ export const videoDetail = async (req, res) => {
     params: { id },
   } = req;
   try {
-    const video = await Video.findById(id)
-      .populate("creator")
-      .populate("comments");
+    const video = await Video.findById(id).populate("creator").populate("comments");
     res.render("videoDetail", { pageTitle: video.title, video });
   } catch (error) {
     res.redirect(routes.home);
@@ -159,10 +156,7 @@ export const postDeleteComment = async (req, res) => {
       throw Error();
     } else {
       await Comment.findOneAndRemove({ _id: comment.id });
-      await Video.findOneAndUpdate(
-        { _id: videoId },
-        { $pull: { comments: comment.id } }
-      );
+      await Video.findOneAndUpdate({ _id: videoId }, { $pull: { comments: comment.id } });
     }
     res.status(200);
   } catch (error) {

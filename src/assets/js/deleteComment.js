@@ -1,8 +1,6 @@
 import axios from "axios";
 
-const deleteCommentBtnsCollection = document.getElementsByClassName(
-  "jsDeleteCommentButton"
-);
+const deleteCommentBtnsCollection = document.getElementsByClassName("jsDeleteCommentButton");
 const commentNumber = document.getElementById("jsCommentNumber");
 const commentText = document.getElementById("jsCommentText");
 

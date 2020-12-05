@@ -118,3 +118,5 @@ dist
 # custom
 package-lock.json
 uploads
+static
+build
