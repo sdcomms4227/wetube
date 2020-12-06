@@ -51,7 +51,8 @@
     "windows-prebuild": "mkdir build && rmdir /s/q build",
     "prebuild": "rm -rf build",
     "turnel": "ngrok http 4000",
-    "start": "node build/init.js"
+    "start": "PRODUCTION=true node build/init.js",
+    "prestart": "npm run build"
   },
   "devdependencies": {
     "eslint": "^7.12.0",
