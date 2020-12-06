@@ -40,9 +40,9 @@
     "build:server": "babel src --out-dir build --ignore 'src\\assets','src\\static','src\\webpack.config.js'",
     "windows-copyAll": "xcopy /i/s/y src\\static build\\static && xcopy /i/s/y src\\views build\\views",
     "copyAll": "cp -R src/static build && cp -R src/views build",
-    "build": "npm run build:server && npm run build:assets && npm run windows-copyAll",
-    "prebuild": "mkdir build && rmdir /s/q build",
-    "linux-prebuild": "rm -rf build",
+    "build": "npm run build:server && npm run build:assets && npm run copyAll",
+    "windows-prebuild": "mkdir build && rmdir /s/q build",
+    "prebuild": "rm -rf build",
     "turnel": "ngrok http 4000",
     "start": "node build/init.js"
   },
