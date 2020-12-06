@@ -1,10 +1,7 @@
 import passport from "passport";
 import GithubStrategy from "passport-github2";
 import FacebookStrategy from "passport-facebook";
-import {
-  facebookLoginCallback,
-  githubLoginCallback,
-} from "./controllers/userController";
+import { facebookLoginCallback, githubLoginCallback } from "./controllers/userController";
 import User from "./models/User";
 import routes from "./routes";
 
@@ -15,11 +12,11 @@ passport.use(
     {
       clientID: process.env.GH_ID,
       clientSecret: process.env.GH_SECRET,
-      callbackURL: `http://localhost:4000${routes.githubCallback}`,
+      callbackURL: process.env.PRODUCTION ? `https://pacific-forest-14871.herokuapp.com${routes.githubCallback}` : `http://localhost:4000${routes.githubCallback}`,
       scope: ["user:email"],
     },
-    githubLoginCallback
-  )
+    githubLoginCallback,
+  ),
 );
 
 passport.use(
@@ -31,8 +28,8 @@ passport.use(
       profileFields: ["id", "displayName", "photos", "email"],
       scope: ["public_profile", "email"],
     },
-    facebookLoginCallback
-  )
+    facebookLoginCallback,
+  ),
 );
 
 passport.serializeUser(User.serializeUser());
